@@ -1,12 +1,18 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 namespace simple_social_network.Models
 {
     public class UserPosts
     {
-        public Guid PostId = Guid.NewGuid();
+        [Key]
+        public Guid PostId
+        {
+            get { return PostId; }
+            set { PostId = Guid.NewGuid(); }
+        }
         public Guid UserId { get; set; }
         public string PhotoLink { get; set; }
         public string Description { get; set; }

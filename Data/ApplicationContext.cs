@@ -19,7 +19,23 @@ namespace simple_social_network.Data
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseNpgsql("Host=localhost;Port=5433;Database=socialnetworkdb;Username=postgres;Password=Dd_14.04.2014_");
+            //optionsBuilder.UseNpgsql("Host=localhost;Port=5432;Database=socialnetworkdb;Username=postgres;Password=Dd_14.04.2014_");
+            optionsBuilder.UseSqlServer(@"Connection String Here");
+        }
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<CommunityPostComments>()
+                .HasKey(o => new { o.PostId, o.UserId });
+            modelBuilder.Entity<CommunityPostComments>()
+                .HasKey(o => o.UserId);
+            modelBuilder.Entity<CommunityPostLikes>()
+                .HasKey(o => new { o.PostId, o.UserId });
+            modelBuilder.Entity<CommunitySubscriptions>()
+                .HasKey(o => new { o.UserId, o.CommunityId });
+            modelBuilder.Entity<UserPostComments>()
+                .HasKey(o => new { o.PostId, o.UserId });
+            modelBuilder.Entity<UserPostLikes>()
+                .HasKey(o => new { o.PostId, o.UserId });
         }
     }
 }

@@ -1,12 +1,18 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 namespace simple_social_network.Models.CommunityModels
 {
     public class Communities
     {
-        public Guid CommunityId { get; set; }
+        [Key]
+        public Guid CommunityId
+        {
+            get { return CommunityId; }
+            set { CommunityId = Guid.NewGuid(); }
+        }
         public string CommunityName { get; set; }
         public string Description { get; set; }
         public DateTime DateOfCreation { get; set; }
